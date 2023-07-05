@@ -7,10 +7,11 @@ services:
     image: ccat-discord-bot
     command: pnpm dev
     ports:
-      - "80:80"
+      - "3000:80"
     environment:
       - BOT_TOKEN=${BOT_TOKEN:-}
       - CLIENT_ID=${CLIENT_ID:-}
     restart: unless-stopped
     volumes:
       - ./:/bot/
+      - ./node_modules:/bot/node_modules
