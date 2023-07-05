@@ -1,12 +1,12 @@
 import { ChatInputCommandInteraction, EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder, version } from 'discord.js'
 import sysinfo from 'systeminformation'
-import { Command } from '../../utils/types'
+import { Command } from '@utils/types'
 
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('stats')
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-		.setDescription('Show the statistics about the Cheshire Cat AI bot'),
+		.setDescription('Show the statistics about the Cheshire Cat AI bot').toJSON(),
 	async execute(interaction: ChatInputCommandInteraction) {
 		const load = await sysinfo.processes()
 		const proc = load.list.find(v => v.pid === process.pid)

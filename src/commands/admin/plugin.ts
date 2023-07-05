@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
-import { Command } from '../../utils/types';
-import { cat } from '../../index';
+import { Command } from '@utils/types';
+import { cat } from '@/index';
 
 const cmd: Command = {
 	data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ const cmd: Command = {
 		.setDescription('Manage the plugins in the Cheshire Cat instance')
 		.addSubcommand(sub =>
 			sub.setName('list').setDescription('Shows the list of plugins installed'),
-		),
+		).toJSON(),
 	async execute(interaction: ChatInputCommandInteraction) {
 		await interaction.reply({ content: '***Getting the list of plugins installed...***' })
 		const plugins = await cat.api.plugins.listAvailablePlugins()

@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "include": [
     ".eslintrc.js",
     "src/**/*.ts"
@@ -9,8 +12,11 @@
       "DOM", 
       "ESNext"
     ],
+    "baseUrl": ".",
     "paths": {
-      
+      "@/*": ["./src/*"],
+      "@commands/*": ["./src/commands/*"],
+      "@utils/*": ["./src/utils/*"],
     },
     "rootDir": ".",
     "target": "ESNext",

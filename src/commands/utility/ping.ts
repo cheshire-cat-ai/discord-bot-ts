@@ -1,11 +1,11 @@
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from 'discord.js';
-import { colorByNumber, sleep } from '../../utils/helpers';
-import { Command } from '../../utils/types';
+import { colorByNumber, sleep } from '@utils/helpers';
+import { Command } from '@utils/types';
 
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Replies with the latency between you and the bot in ms (milliseconds)'),
+		.setDescription('Replies with the latency between you and the bot in ms (milliseconds)').toJSON(),
 	async execute(interaction: ChatInputCommandInteraction) {
 		await interaction.reply({ content: '***Pinging the Cheshire Cat***', ephemeral: true });
 		const pArr = ['.', '..', '...'];

@@ -3,7 +3,7 @@ import { CatClient } from 'ccat-api';
 import dotenv from 'dotenv';
 import fs from 'node:fs';
 import path from 'node:path';
-import { Command } from './utils/types';
+import { Command } from '@utils/types';
 
 dotenv.config();
 
@@ -79,7 +79,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN ?? '');
 	try {
 		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
 		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID ?? ''), {
-			body: client.commands.map(c => c.data.toJSON()),
+			body: client.commands.map(c => c.data),
 		});
 		console.log(`Successfully reloaded ${client.commands.size} application (/) commands.`);
 	} catch (error) {
