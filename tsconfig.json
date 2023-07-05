@@ -1,0 +1,28 @@
+{
+  "include": [
+    ".eslintrc.js",
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "lib": [
+      "DOM", 
+      "ESNext"
+    ],
+    "paths": {
+      
+    },
+    "rootDir": ".",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true
+  }
+}
