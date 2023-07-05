@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-RUN npm i -g npm
+RUN npm i -g pnpm
 
 RUN mkdir -p /bot
 WORKDIR /bot
