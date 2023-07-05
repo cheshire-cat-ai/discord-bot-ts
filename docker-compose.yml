@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  bot:
+    container_name: ccat-discord-bot
+    build: .
+    image: ccat-discord-bot
+    command: pnpm dev
+    ports:
+      - "80:80"
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN:-}
+      - CLIENT_ID=${CLIENT_ID:-}
+    restart: unless-stopped
+    volumes:
+      - ./:/bot/

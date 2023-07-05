@@ -1,11 +1,13 @@
 FROM node:18-alpine
 
+RUN npm i -g npm
+
 RUN mkdir -p /bot
 WORKDIR /bot
 
-COPY package.json /bot
-RUN npm install
+COPY package.json pnpm-lock.yaml ./bot/
+RUN pnpm install
 
 COPY . /bot
 
-CMD ["npm", "run", "dev"]
+CMD ["pnpm", "dev"]
