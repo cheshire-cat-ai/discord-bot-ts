@@ -5,7 +5,8 @@ RUN npm i -g pnpm
 RUN mkdir -p /bot
 WORKDIR /bot
 
-COPY package.json pnpm-lock.yaml ./bot/
+COPY package.json ./bot
+COPY pnpm-lock.yaml ./bot
 RUN pnpm install
 
 COPY . /bot
