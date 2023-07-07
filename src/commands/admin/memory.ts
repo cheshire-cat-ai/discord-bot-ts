@@ -5,7 +5,7 @@ import { cat } from '@/index';
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('memory')
-		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		.setDescription('Manage the memories in the Cheshire Cat instance')
 		.addSubcommand(sub =>
 			sub.setName('wipe').setDescription('Choose what to wipe in the long term memory')

@@ -5,7 +5,7 @@ import { cat } from '@/index';
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('plugin')
-		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		.setDescription('Manage the plugins in the Cheshire Cat instance')
 		.addSubcommand(sub =>
 			sub.setName('list').setDescription('Shows the list of plugins installed'),

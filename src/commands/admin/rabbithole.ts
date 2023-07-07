@@ -5,7 +5,7 @@ import { cat } from '@/index';
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('rabbithole')
-		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		.setDescription('Manage the Rabbit Hole in the Cheshire Cat instance')
 		.addSubcommand(sub =>
 			sub.setName('web').setDescription('Upload a website url to the Rabbit Hole')
@@ -20,7 +20,7 @@ const cmd: Command = {
 	async execute(interaction: ChatInputCommandInteraction) {
 		switch (interaction.options.getSubcommand()) {
             case 'web': {
-                const url = interaction.options.getString('web', true)
+                const url = interaction.options.getString('url', true)
                 await interaction.reply({ content: '***Uploading url to the Rabbit Hole...***' })
                 await cat.api.rabbitHole.uploadUrl({ url })
                 await interaction.editReply({ content: `***Website \`${url}\` uploaded with success!***` })
