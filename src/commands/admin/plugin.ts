@@ -11,9 +11,18 @@ const cmd: Command = {
 			sub.setName('list').setDescription('Shows the list of plugins installed'),
 		).toJSON(),
 	async execute(interaction: ChatInputCommandInteraction) {
-		await interaction.reply({ content: '***Getting the list of plugins installed...***' })
-		const plugins = await cat.api.plugins.listAvailablePlugins()
-		await interaction.editReply({ content: `***Installed plugins***:\n- ${plugins.installed.map(p => p.name).join('\n- ')}` })
+		switch (interaction.options.getSubcommand()) {
+            case 'list': {
+                await interaction.reply({ content: '***Getting the list of plugins installed...***' })
+				const plugins = await cat.api.plugins.listAvailablePlugins()
+				await interaction.editReply({ content: `***Installed plugins***:\n- ${plugins.installed.map(p => p.name).join('\n- ')}` })
+                break;
+            }
+            default: {
+                await interaction.reply({ content: '***The selected command is not supported***' })
+                break;
+            }
+		}
 	},
 };
 

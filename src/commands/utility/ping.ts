@@ -10,7 +10,7 @@ const cmd: Command = {
 		await interaction.reply({ content: '***Pinging the Cheshire Cat***', ephemeral: true });
 		const pArr = ['.', '..', '...'];
 		for (let i = 0; i < 3; i++) {
-			await sleep(750);
+			await sleep(500);
 			await interaction.editReply({ content: `***Pinging the Cheshire Cat${pArr[i]}***` });
 		}
 		const ping = new EmbedBuilder()
