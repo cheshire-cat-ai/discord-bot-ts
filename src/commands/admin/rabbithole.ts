@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
+import { AcceptedFileContentTypes } from 'ccat-api';
 import { Command } from '@utils/types';
 import { cat } from '@/index';
 
@@ -38,6 +39,11 @@ const cmd: Command = {
                 const file = interaction.options.getAttachment('file', true)
                 await interaction.reply({ content: '***Uploading file to the Rabbit Hole...***' })
                 const blob = await fetch(file.url).then(r => r.blob())
+                type AcceptedFileContentType = typeof AcceptedFileContentTypes[number]
+                if (!AcceptedFileContentTypes.includes(blob.type as AcceptedFileContentType)) {
+                    await interaction.editReply({ content: `***The file extension \`${blob.type}\` !***` })
+                    break;
+                }
                 await cat.api.rabbitHole.uploadFile({ file: blob })
                 await interaction.editReply({ content: `***The file \`${file.name}\` was uploaded with success!***` })
                 break;
