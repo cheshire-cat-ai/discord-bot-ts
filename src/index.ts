@@ -15,7 +15,7 @@ const client = new Client({ intents: [
 	GatewayIntentBits.GuildPresences,
 	GatewayIntentBits.GuildMessageReactions,
 	GatewayIntentBits.GuildEmojisAndStickers,
-] }) as Client<boolean> & { commands: Collection<string, Command> };
+] }) as Client & { commands: Collection<string, Command> };
 
 client.commands = new Collection();
 

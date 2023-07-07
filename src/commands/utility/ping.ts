@@ -17,7 +17,7 @@ const cmd: Command = {
 			.setColor(colorByNumber(Math.round(interaction.client.ws.ping)))
 			.setTitle('***Pong !***')
 			.setDescription(`:ping_pong: \`${Math.round(interaction.client.ws.ping)} ms !\``);
-		await interaction.editReply({ embeds: [ping] });
+		await interaction.editReply({ content: '', embeds: [ping] });
 	},
 };
 

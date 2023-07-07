@@ -8,9 +8,9 @@ const cmd: Command = {
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.setDescription('Manage the memories in the Cheshire Cat instance')
 		.addSubcommand(sub =>
-			sub.setName('wipe').setDescription('Shows the list of plugins installed')
+			sub.setName('wipe').setDescription('Choose what to wipe in the long term memory')
 			.addStringOption(option =>
-				option.setName('collection').setRequired(true).addChoices(
+				option.setName('collection').setDescription('The name of the collection to wipe').setRequired(true).addChoices(
 					{ name: 'All', value: 'all' },
 					{ name: 'History', value: 'history' },
 				),

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "nodemon --watch 'src/**/*' --exec npm run start",
+    "dev": "nodemon --watch 'src/**/*' --ext ts,json --exec npm run start",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "start": "ts-node src/index.ts"
   },
