@@ -3,7 +3,7 @@
     "require": ["tsconfig-paths/register"]
   },
   "include": [
-    ".eslintrc.js",
+    ".eslintrc.json",
     "src/**/*.ts"
   ],
   "compilerOptions": {
