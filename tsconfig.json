@@ -4,6 +4,7 @@
   },
   "include": [
     ".eslintrc.json",
+    "globals.d.ts",
     "src/**/*.ts"
   ],
   "compilerOptions": {

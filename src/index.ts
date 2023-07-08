@@ -1,10 +1,12 @@
 import { Client, Collection, Events, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { CatClient } from 'ccat-api';
+import clear from 'clear';
 import dotenv from 'dotenv';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Command } from '@utils/types';
 
+clear();
 dotenv.config();
 
 const client = new Client({ intents: [
@@ -63,7 +65,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-const rest = new REST().setToken(process.env.BOT_TOKEN ?? '');
+const rest = new REST().setToken(process.env.BOT_TOKEN);
 
 (async () => {
 	for (const folder of commandFolders) {
@@ -78,7 +80,7 @@ const rest = new REST().setToken(process.env.BOT_TOKEN ?? '');
 	}
 	try {
 		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID ?? ''), {
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
 			body: client.commands.map(c => c.data),
 		});
 		console.log(`Successfully reloaded ${client.commands.size} application (/) commands.`);

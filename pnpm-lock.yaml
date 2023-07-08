@@ -20,6 +20,9 @@ dependencies:
   ccat-api:
     specifier: ^0.4.3
     version: 0.4.3(bufferutil@4.0.7)(utf-8-validate@6.0.3)
+  clear:
+    specifier: ^0.1.0
+    version: 0.1.0
   discord-api-types:
     specifier: ^0.37.47
     version: 0.37.47
@@ -37,6 +40,9 @@ dependencies:
     version: 6.0.3
 
 devDependencies:
+  '@types/clear':
+    specifier: ^0.1.2
+    version: 0.1.2
   '@types/node':
     specifier: ^20.4.0
     version: 20.4.0
@@ -501,6 +507,10 @@ packages:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
     dev: true
 
+  /@types/clear@0.1.2:
+    resolution: {integrity: sha512-h3GHp9BuPgY3X+WKWwJgTIl/h38KkcdU6JG28i1xdrlS8YXVi3V1YrhaZkjuvur97qZo8TMQjVXJorTf87LvfA==}
+    dev: true
+
   /@types/json-schema@7.0.12:
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
     dev: true
@@ -830,6 +840,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /clear@0.1.0:
+    resolution: {integrity: sha512-qMjRnoL+JDPJHeLePZJuao6+8orzHMGP04A8CdwCNsKhRbOnKRjefxONR7bwILT3MHecxKBjHkKL/tkZ8r4Uzw==}
+    dev: false
 
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}

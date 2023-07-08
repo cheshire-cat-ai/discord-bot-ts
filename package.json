@@ -34,6 +34,7 @@
     "@discordjs/ws": "^0.8.3",
     "bufferutil": "^4.0.7",
     "ccat-api": "^0.4.3",
+    "clear": "^0.1.0",
     "discord-api-types": "^0.37.47",
     "discord.js": "^14.11.0",
     "dotenv": "^16.3.1",
@@ -41,6 +42,7 @@
     "utf-8-validate": "^6.0.3"
   },
   "devDependencies": {
+    "@types/clear": "^0.1.2",
     "@types/node": "^20.4.0",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
