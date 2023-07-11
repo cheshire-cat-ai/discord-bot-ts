@@ -1,4 +1,4 @@
-import { Client, Collection, Events, GatewayIntentBits, REST, Routes } from 'discord.js';
+import { Client as BotClient, Collection, Events, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { CatClient } from 'ccat-api';
 import clear from 'clear';
 import dotenv from 'dotenv';
@@ -9,7 +9,7 @@ import { Command } from '@utils/types';
 clear();
 dotenv.config();
 
-const client = new Client({ intents: [
+const client = new BotClient({ intents: [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.MessageContent,
@@ -17,7 +17,7 @@ const client = new Client({ intents: [
 	GatewayIntentBits.GuildPresences,
 	GatewayIntentBits.GuildMessageReactions,
 	GatewayIntentBits.GuildEmojisAndStickers,
-] }) as Client & { commands: Collection<string, Command> };
+] }) as BotClient & { commands: Collection<string, Command> };
 
 client.commands = new Collection();
 
@@ -25,8 +25,33 @@ const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 export const cat = new CatClient({
-	baseUrl: 'localhost',
+	baseUrl: process.env.URL,
+	port: process.env.PORT,
 })
+
+const rest = new REST().setToken(process.env.BOT_TOKEN);
+
+(async () => {
+	for (const folder of commandFolders) {
+		const commandsPath = path.join(foldersPath, folder);
+		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'));
+		for (const file of commandFiles) {
+			const filePath = path.join(commandsPath, file);
+			const command = (await import(filePath)).default as Command;
+			console.log(`Command '${command.data.name}' loaded.`)
+			client.commands.set(command.data.name, command);
+		}
+	}
+	try {
+		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+			body: client.commands.map(c => c.data),
+		});
+		console.log(`Successfully reloaded ${client.commands.size} application (/) commands.`);
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
@@ -64,29 +89,5 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 	}
 });
-
-const rest = new REST().setToken(process.env.BOT_TOKEN);
-
-(async () => {
-	for (const folder of commandFolders) {
-		const commandsPath = path.join(foldersPath, folder);
-		const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'));
-		for (const file of commandFiles) {
-			const filePath = path.join(commandsPath, file);
-			const command = (await import(filePath)).default as Command;
-			console.log(`Command '${command.data.name}' loaded.`)
-			client.commands.set(command.data.name, command);
-		}
-	}
-	try {
-		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-			body: client.commands.map(c => c.data),
-		});
-		console.log(`Successfully reloaded ${client.commands.size} application (/) commands.`);
-	} catch (error) {
-		console.error(error);
-	}
-})();
 
 client.login(process.env.BOT_TOKEN);
