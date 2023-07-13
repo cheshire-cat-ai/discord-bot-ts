@@ -5,7 +5,7 @@ import { Command } from '@utils/types'
 const cmd: Command = {
 	data: new SlashCommandBuilder()
 		.setName('stats')
-		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		.setDescription('Show the statistics about the Cheshire Cat AI bot').toJSON(),
 	async execute(interaction: ChatInputCommandInteraction) {
 		const load = await sysinfo.processes()

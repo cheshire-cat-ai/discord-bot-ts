@@ -63,7 +63,7 @@ client.on(Events.MessageCreate, msg => {
 	if (msg.author.bot) return;
 
 	if (msg.mentions.members?.first()?.user.id === client.user?.id) {
-		cat.send(msg.content)
+		cat.send(msg.content.replace(`<@${client.user?.id}>`, '').trim())
 		cat.onMessage(res => msg.reply(res.content))
 	}
 })
