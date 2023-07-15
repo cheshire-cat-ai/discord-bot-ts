@@ -1,11 +1,11 @@
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
-            BOT_TOKEN: string;
-            CLIENT_ID: string;
-            URL: string;
-            PORT: string;
-            AUTH_KEY: string;
+            BOT_TOKEN: string | undefined;
+            CLIENT_ID: string | undefined;
+            URL: string | undefined;
+            PORT: string | undefined;
+            AUTH_KEY: string | undefined;
         }
     }
 }

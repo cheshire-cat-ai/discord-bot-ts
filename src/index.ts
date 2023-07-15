@@ -9,6 +9,14 @@ import { Command } from '@utils/types';
 clear();
 dotenv.config();
 
+if (!process.env.BOT_TOKEN) {
+    throw new Error('A Bot token must be set to make it work!')
+}
+
+if (!process.env.URL) {
+    throw new Error('A base URL to which connect the Cheshire Cat must be set to make it work!')
+}
+
 const client = new BotClient({ intents: [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMessages,
@@ -44,6 +52,9 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
 		}
 	}
 	try {
+		if (!process.env.CLIENT_ID) {
+			throw new Error('A Bot client ID must be set to make it work!')
+		}
 		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
 		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
 			body: client.commands.map(c => c.data),
