@@ -14,8 +14,8 @@ const cmd: Command = {
 		switch (interaction.options.getSubcommand()) {
             case 'list': {
                 await interaction.reply({ content: '***Getting the list of plugins installed...***' })
-				const plugins = await cat.api.plugins.listAvailablePlugins()
-				await interaction.editReply({ content: `***Installed plugins***:\n- ${plugins.installed.map(p => p.name).join('\n- ')}` })
+				const plugins = await cat.api?.plugins.listAvailablePlugins()
+				await interaction.editReply({ content: `***Installed plugins***:\n- ${plugins?.installed.map(p => p.name).join('\n- ')}` })
                 break;
             }
             default: {

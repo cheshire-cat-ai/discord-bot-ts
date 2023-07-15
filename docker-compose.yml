@@ -5,7 +5,6 @@ services:
     container_name: ccat-discord-bot
     build: .
     image: ccat-discord-bot
-    # command: /bin/bash -c "echo 12"
     ports:
       - "3000:80"
     environment:

@@ -23,19 +23,19 @@ const cmd: Command = {
                 await interaction.reply({ content: '***Wiping all the collections...***' })
 				switch (collection) {
 					case 'all': {
-						await cat.api.memory.wipeCollections()
+						await cat.api?.memory.wipeCollections()
 						await interaction.editReply({ content: '***All the available collections were wiped successfully!***' })
 						break;
 					}
 					case 'history': {
-						await cat.api.memory.wipeConversationHistory()
+						await cat.api?.memory.wipeConversationHistory()
 						await interaction.editReply({ content: '***The conversation history was wiped successfully!***' })
 						break;
 					}
 					default: {
-						const collections = (await cat.api.memory.getCollections()).collections.map(c => c.name)
-						if (collections.includes(collection)) {
-							await cat.api.memory.wipeSingleCollection(collection)
+						const collections = (await cat.api?.memory.getCollections())?.collections.map(c => c.name)
+						if (collections?.includes(collection)) {
+							await cat.api?.memory.wipeSingleCollection(collection)
 							await interaction.editReply({ content: `***The collection \`${collection}\` was wiped successfully!***` })
 						}
 						break;
