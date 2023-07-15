@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
-import { AcceptedFileTypes, AcceptedFileType } from 'ccat-api';
+import { AcceptedFileTypes, AcceptedFileType, AcceptedMemoryTypes, AcceptedMemoryType } from 'ccat-api';
 import { Command } from '@utils/types';
 import { cat } from '@/index';
 
@@ -29,20 +29,24 @@ const cmd: Command = {
             }
             case 'memory': {
                 const json = interaction.options.getAttachment('json', true)
+                if (!AcceptedMemoryTypes.includes(json.contentType as AcceptedMemoryType)) {
+                    await interaction.editReply({ content: `***The file extension \`${json.contentType}\` is not supported!***` })
+                    break;
+                }
                 await interaction.reply({ content: '***Uploading memory to the Rabbit Hole...***' })
                 const blob = await fetch(json.url).then(r => r.blob())
                 await cat.api?.rabbitHole.uploadMemory({ file: blob })
-                await interaction.editReply({ content: '***Memory json was uploaded with success!***' })
+                await interaction.editReply({ content: '***Memory JSON file was uploaded with success!***' })
                 break;
             }
             case 'content': {
                 const file = interaction.options.getAttachment('file', true)
-                await interaction.reply({ content: '***Uploading file to the Rabbit Hole...***' })
-                const blob = await fetch(file.url).then(r => r.blob())
-                if (!AcceptedFileTypes.includes(blob.type as AcceptedFileType)) {
-                    await interaction.editReply({ content: `***The file extension \`${blob.type}\` !***` })
+                if (!AcceptedFileTypes.includes(file.contentType as AcceptedFileType)) {
+                    await interaction.editReply({ content: `***The file extension \`${file.contentType}\` is not supported!***` })
                     break;
                 }
+                await interaction.reply({ content: '***Uploading file to the Rabbit Hole...***' })
+                const blob = await fetch(file.url).then(r => r.blob())
                 await cat.api?.rabbitHole.uploadFile({ file: blob })
                 await interaction.editReply({ content: `***The file \`${file.name}\` was uploaded with success!***` })
                 break;
