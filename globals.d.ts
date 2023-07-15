@@ -5,6 +5,7 @@ declare global {
             CLIENT_ID: string;
             URL: string;
             PORT: string;
+            AUTH_KEY: string;
         }
     }
 }

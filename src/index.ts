@@ -27,6 +27,7 @@ const commandFolders = fs.readdirSync(foldersPath);
 export const cat = new CatClient({
 	baseUrl: process.env.URL,
 	port: process.env.PORT,
+	authKey: process.env.AUTH_KEY,
 })
 
 const rest = new REST().setToken(process.env.BOT_TOKEN);
