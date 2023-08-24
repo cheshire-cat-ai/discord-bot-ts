@@ -30,28 +30,28 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@discordjs/builders": "^1.6.3",
-    "@discordjs/rest": "^1.7.1",
-    "@discordjs/ws": "^0.8.3",
+    "@discordjs/builders": "^1.6.5",
+    "@discordjs/rest": "^2.0.1",
+    "@discordjs/ws": "^1.0.1",
     "bufferutil": "^4.0.7",
-    "ccat-api": "^0.5.0",
+    "ccat-api": "^0.7.1",
     "clear": "^0.1.0",
-    "discord-api-types": "^0.37.48",
-    "discord.js": "^14.11.0",
+    "discord-api-types": "^0.37.55",
+    "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
-    "systeminformation": "^5.18.7",
+    "systeminformation": "^5.19.1",
     "utf-8-validate": "^6.0.3"
   },
   "devDependencies": {
     "@types/clear": "^0.1.2",
-    "@types/node": "^20.4.2",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.45.0",
+    "@types/node": "^20.5.4",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "tsup": "^7.1.0",
-    "typescript": "^5.1.6"
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
   }
 }

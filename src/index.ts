@@ -9,11 +9,17 @@ import { Command } from '@utils/types';
 clear();
 dotenv.config();
 
-if (!process.env.BOT_TOKEN) {
-    throw new Error('A Bot token must be set to make it work!')
+const { BOT_TOKEN, URL, PORT, AUTH_KEY, CLIENT_ID } = process.env
+
+if (!BOT_TOKEN) {
+    throw new Error('A Bot Token must be set to make it work!')
 }
 
-if (!process.env.URL) {
+if (!CLIENT_ID) {
+	throw new Error('A Bot Client ID must be set to make it work!')
+}
+
+if (!URL) {
     throw new Error('A base URL to which connect the Cheshire Cat must be set to make it work!')
 }
 
@@ -33,12 +39,12 @@ const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 export const cat = new CatClient({
-	baseUrl: process.env.URL,
-	port: process.env.PORT,
-	authKey: process.env.AUTH_KEY,
+	baseUrl: URL,
+	port: PORT ? parseInt(PORT) : undefined,
+	authKey: AUTH_KEY,
 })
 
-const rest = new REST().setToken(process.env.BOT_TOKEN);
+const rest = new REST().setToken(BOT_TOKEN);
 
 (async () => {
 	for (const folder of commandFolders) {
@@ -52,11 +58,8 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
 		}
 	}
 	try {
-		if (!process.env.CLIENT_ID) {
-			throw new Error('A Bot client ID must be set to make it work!')
-		}
 		console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
-		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+		await rest.put(Routes.applicationCommands(CLIENT_ID), {
 			body: client.commands.map(c => c.data),
 		});
 		console.log(`Successfully reloaded ${client.commands.size} application (/) commands.`);
@@ -102,4 +105,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login(BOT_TOKEN);
