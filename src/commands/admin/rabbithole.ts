@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
-import { AcceptedFileTypes, AcceptedFileType, AcceptedMemoryTypes, AcceptedMemoryType } from 'ccat-api';
+import { AcceptedMemoryTypes, AcceptedMemoryType } from 'ccat-api';
 import { Command } from '@utils/types';
 import { cat } from '@/index';
 
@@ -41,7 +41,9 @@ const cmd: Command = {
             }
             case 'content': {
                 const file = interaction.options.getAttachment('file', true)
-                if (!AcceptedFileTypes.includes(file.contentType as AcceptedFileType)) {
+                const acceptedTypes = (await cat.api?.rabbitHole.getAllowedMimetypes())?.allowed
+                if (!acceptedTypes || !file.contentType) return
+                if (!acceptedTypes.includes(file.contentType)) {
                     await interaction.editReply({ content: `***The file extension \`${file.contentType}\` is not supported!***` })
                     break;
                 }
