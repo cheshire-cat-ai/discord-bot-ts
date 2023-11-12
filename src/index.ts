@@ -75,12 +75,14 @@ client.once(Events.ClientReady, c => {
 client.on(Events.MessageCreate, msg => {
 	if (msg.author.id === client.user?.id) return;
 
-	if (msg.author.bot) return;
+	if (msg.author.bot || !msg.mentions.members?.find(m => m.id === client.user?.id)) return;
 
-	if (msg.mentions.members?.first()?.user.id === client.user?.id) {
-		cat.send(msg.content.replace(`<@${client.user?.id}>`, '').trim())
-		cat.onMessage(res => msg.reply(res.content))
-	}
+	let content = msg.content.trim();
+
+	msg.mentions.members?.forEach(m => content = content.replace(`<@${m.id}>`, m.id === client.user?.id ? m.displayName : 'You'))
+
+	cat.send(content)
+	cat.onMessage(res => msg.reply(res.content))
 })
 
 client.on(Events.InteractionCreate, async interaction => {
