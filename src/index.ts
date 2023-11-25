@@ -73,7 +73,7 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on(Events.MessageCreate, msg => {
-	if (msg.author.id === client.user?.id) return;
+	if (msg.author.id === client.user?.id || msg.system) return;
 
 	if (msg.author.bot || !msg.mentions.members?.find(m => m.id === client.user?.id)) return;
 
