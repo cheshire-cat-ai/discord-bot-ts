@@ -82,7 +82,11 @@ client.on(Events.MessageCreate, msg => {
 	msg.mentions.members?.forEach(m => content = content.replace(`<@${m.id}>`, m.id === client.user?.id ? m.displayName : 'You'))
 
 	cat.send(content)
-	cat.onMessage(res => msg.reply(res.content))
+	cat.onMessage(res => {
+		if (res.type === "chat") {
+			msg.reply(res.content);
+		}
+	  })
 })
 
 client.on(Events.InteractionCreate, async interaction => {
